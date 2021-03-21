@@ -28,7 +28,7 @@ class UsersDataTable extends DataTable
                 return $user->created_at->diffForHumans();
             })
             ->addColumn('updated_at', function (User $user) {
-                return $user->created_at->diffForHumans();
+                return $user->updated_at->diffForHumans();
             })
             ->addColumn('action', 'app.users._action');
     }
