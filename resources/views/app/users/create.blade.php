@@ -17,7 +17,7 @@
                             @csrf
                             @include('app.users._form')
                             <div class="form-group">
-                                <input type="submit" value="Edit" class="btn btn-primary">
+                                <input type="submit" value="Create" class="btn btn-primary">
                             </div>
                         </form>
                     </div>

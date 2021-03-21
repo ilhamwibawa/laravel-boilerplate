@@ -311,6 +311,8 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+__webpack_require__(/*! datatables.net-bs4 */ "./node_modules/datatables.net-bs4/js/dataTables.bootstrap4.js");
+
 __webpack_require__(/*! ./stisla/jquery.selectric.min */ "./resources/js/stisla/jquery.selectric.min.js");
 
 __webpack_require__(/*! ./stisla/scripts */ "./resources/js/stisla/scripts.js");

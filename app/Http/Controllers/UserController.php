@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\UsersDataTable;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserCreateRequest;
@@ -19,11 +20,10 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(UsersDataTable $dataTable)
     {
-        $users = User::latest()->paginate();
-
-        return view('app.users.index', compact('users'));
+        // return view('app.users.index', compact('dataTable'));
+        return $dataTable->render('app.users.index');
     }
 
     /**
