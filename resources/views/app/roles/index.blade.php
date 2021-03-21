@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Role Management')
+@section('title', 'Roles')
 
 @section('content')
 
@@ -11,8 +11,8 @@
 
         <div class="modal-content">
             <div class="modal-header">
+                <h4 class="modal-title" id="roleModalLabel">New Role</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                <h4 class="modal-title" id="roleModalLabel">Role</h4>
             </div>
             <div class="modal-body">
                 <!-- name Form Input -->
@@ -36,7 +36,7 @@
     <div class="section-header d-flex align-items-center justify-content-between">
         <h4>Role Management</h4>
         @can('add_roles')
-            <a href="#" class="btn btn-sm btn-success pull-right" data-toggle="modal" data-target="#roleModal"> <i class="glyphicon glyphicon-plus"></i> New</a>
+            <a href="#" class="btn btn-success pull-right" data-toggle="modal" data-target="#roleModal"> <i class="fa fa-plus"></i> New Role</a>
         @endcan
     </div>
     @include('flash::message')

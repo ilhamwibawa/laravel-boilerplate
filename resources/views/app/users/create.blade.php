@@ -10,7 +10,7 @@
     @include('flash::message')
     <div class="section-body">
         <div class="row">
-            <div class="col-8">
+            <div class="col-md-8">
                 <div class="card">
                     <div class="card-body">
                         <form action="{{route('users.store')}}" method="POST">
