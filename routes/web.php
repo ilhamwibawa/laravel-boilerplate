@@ -21,7 +21,10 @@ Auth::routes();
 
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'], function () {
     Route::resource('users', 'UserController');
     Route::resource('roles', 'RoleController');
+    Route::get('/profile', 'UserController@userProfile')->name('users.profile.index');
+    Route::put('/profile', 'UserController@updateUserProfile')->name('users.profile.update');
+    Route::put('/profile/password', 'UserController@updateUserPassword')->name('users.profile.password');
 });

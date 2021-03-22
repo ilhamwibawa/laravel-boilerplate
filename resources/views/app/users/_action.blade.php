@@ -5,6 +5,6 @@
     <form class="d-inline" action="{{ route('users.destroy', $id)}}" method="POST">
         @csrf
         @method('delete')
-        <button class="btn btn-danger" type="submit">Delete</button>
+        <button class="btn btn-danger" onclick="return confirm('Are you sure want to delete this user?')" type="submit">Delete</button>
     </form>
 @endcan

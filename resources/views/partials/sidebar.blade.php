@@ -8,7 +8,7 @@
     <ul class="sidebar-menu">
         <li class="menu-header">Dashboard</li>
         <li class="{{ request()->is('dashboard') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ url('dashboard') }}">
+            <a class="nav-link" href="{{ route('dashboard') }}">
                 <i class="fas fa-columns"></i> <span>Dashboard</span>
             </a>
         </li>
@@ -17,14 +17,14 @@
         @endif
         @can('view_users')
             <li class="{{ request()->is('users') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ url('users')}}">
+                <a class="nav-link" href="{{ route('users.index')}}">
                     <i class="fas fa-users"> </i> <span>Users</span>
                 </a>
             </li>
         @endcan
         @can('view_roles')
             <li class="{{ request()->is('roles') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ url('roles')}}">
+                <a class="nav-link" href="{{ route('roles.index')}}">
                     <i class="fas fa-lock"> </i> <span>Roles</span>
                 </a>
             </li>

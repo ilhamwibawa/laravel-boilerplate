@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\UsersDataTable;
+use App\Role;
 use App\User;
+use App\Permission;
+use App\Traits\Authorizable;
 use Illuminate\Http\Request;
+use App\Rules\MatchOldPassword;
+use App\DataTables\UsersDataTable;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserUpdateRequest;
-use App\Permission;
-use App\Role;
-use App\Traits\Authorizable;
-use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -48,7 +50,7 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:8',
+            'password' => 'required|min:6',
             'password_confirmation' => 'required|same:password'
         ]);
 
@@ -98,10 +100,23 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required',
+            'roles' => 'required'
+        ]);
+
         $user->fill($request->except('roles', 'permissions', 'password'));
 
         if ($request->get('password')) {
-            $user->password = bcrypt($request->get('password'));
+            if ($request->get('password') == $request->get('password_confirmation')) {
+                $user->password = bcrypt($request->get('password'));
+                flash('Password berhasil di update');
+            } else {
+                flash()->error('Password confirmation tidak sama');
+                return redirect()->back();
+            }
         }
 
         $this->syncPermissions($request, $user);
@@ -135,6 +150,48 @@ class UserController extends Controller
         }
 
         return redirect()->route('users.index');
+    }
+
+    public function userProfile()
+    {
+        $user = Auth::user();
+        $roles = Role::pluck('name', 'id');
+
+        return view('app.users.profile', compact('user', 'roles'));
+    }
+
+    public function updateUserProfile(Request $request)
+    {
+        $user = User::where('id', Auth::user()->id)->first();
+
+        $user->fill($request->except('roles', 'permissions', 'password'));
+        $this->syncPermissions($request, $user);
+
+        if ($user->save()) {
+            flash()->success('Berhasil Update profile');
+        } else {
+            flash()->error('Gagal Update profile');
+        }
+
+        return redirect()->back();
+    }
+
+    public function updateUserPassword(Request $request)
+    {
+        $user = User::where('id', Auth::user()->id)->first();
+
+        $this->validate($request, [
+            'current_password' => ['required', new MatchOldPassword],
+            'password' => 'required|min:6',
+            'password_confirmation' => 'required|same:password'
+        ]);
+
+        $user->password = bcrypt($request->get('password'));
+        if ($user->save()) {
+            flash()->success('Password berhasil di update');
+        }
+
+        return redirect()->back();
     }
 
     private function syncPermissions(Request $request, $user)

@@ -18,7 +18,7 @@
         </a>
         <div class="dropdown-menu dropdown-menu-right">
             <div class="dropdown-title">Hi, {{Auth::user()->name}}</div>
-            <a href="#" class="dropdown-item has-icon">
+            <a href="{{ route('users.profile.index') }}" class="dropdown-item has-icon">
                 <i class="far fa-user"></i> Profile Settings
             </a>
             <div class="dropdown-divider"></div>
