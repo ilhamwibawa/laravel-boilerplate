@@ -16,14 +16,14 @@
             <li class="menu-header">Users Management</li>
         @endif
         @can('view_users')
-            <li class="{{ request()->is('users') ? 'active' : '' }}">
+            <li class="{{ request()->is('dashboard/users') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('users.index')}}">
                     <i class="fas fa-users"> </i> <span>Users</span>
                 </a>
             </li>
         @endcan
         @can('view_roles')
-            <li class="{{ request()->is('roles') ? 'active' : '' }}">
+            <li class="{{ request()->is('dashboard/roles') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('roles.index')}}">
                     <i class="fas fa-lock"> </i> <span>Roles</span>
                 </a>
