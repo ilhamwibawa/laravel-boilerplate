@@ -125,7 +125,7 @@ class UserController extends Controller
     {
         if (Auth::user()->id == $user->id) {
             flash()->warning('Deletion of currently logged in user is not allowed :(')->important();
-            return redirect()->back();
+            return redirect()->route('users.index');
         }
 
         if ($user->delete()) {
@@ -134,7 +134,7 @@ class UserController extends Controller
             flash()->error('Gagal menghapus user');
         }
 
-        return redirect()->back();
+        return redirect()->route('users.index');
     }
 
     private function syncPermissions(Request $request, $user)
