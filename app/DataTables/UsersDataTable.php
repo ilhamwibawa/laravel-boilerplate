@@ -24,11 +24,11 @@ class UsersDataTable extends DataTable
             ->addColumn('roles', function (User $user) {
                 return $user->getRoleNames()->implode(',');
             })
-            ->addColumn('created_at', function (User $user) {
-                return $user->created_at->diffForHumans();
+            ->editColumn('created_at', function (User $user) {
+                return $user->created_at->format('d/m/Y');
             })
-            ->addColumn('updated_at', function (User $user) {
-                return $user->updated_at->diffForHumans();
+            ->editColumn('updated_at', function (User $user) {
+                return $user->updated_at->format('d/m/Y');
             })
             ->addColumn('action', 'app.users._action');
     }
@@ -55,7 +55,6 @@ class UsersDataTable extends DataTable
             ->setTableId('users-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->dom('Bfrtip')
             ->orderBy(1);
     }
 
