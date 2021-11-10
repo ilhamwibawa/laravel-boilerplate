@@ -5,7 +5,7 @@
 </div>
 <div class="form-group">
     <label for="email">Email</label>
-    <input type="text" name="email" id="email" class="form-control @if ($errors->has('email')) is-invalid @endif" @isset($user) value="{{$user->email}}" readonly @endisset>
+    <input type="text" name="email" id="email" class="form-control @if ($errors->has('email')) is-invalid @endif" @isset($user) value="{{$user->email}}" @endisset>
     @if ($errors->has('email')) <p class="invalid-feedback">{{ $errors->first('email') }}</p> @endif
 </div>
 <div class="row">

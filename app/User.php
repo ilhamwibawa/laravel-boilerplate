@@ -3,14 +3,15 @@
 namespace App;
 
 use App\Traits\Uuids;
+use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use Notifiable, Uuids, HasRoles;
+    use Notifiable, Uuids, HasRoles, HasApiTokens;
 
     /**
      * Indicates if the IDs are auto-incrementing.
